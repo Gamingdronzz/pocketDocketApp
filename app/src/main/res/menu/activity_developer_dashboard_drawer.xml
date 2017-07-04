@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/member" android:checkableBehavior="single">
+        <item android:id="@+id/myInfo" android:icon="@mipmap/info"
+            android:title="My Info" />
+        <item android:id="@+id/myProjects" android:icon="@mipmap/projects"
+            android:title="My Projects" />
+    </group>
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/signout"
+            android:icon="@mipmap/logout"
+            android:title="Sign Out" />
+    </group>
+
+
+</menu>

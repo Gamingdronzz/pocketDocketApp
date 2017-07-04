@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Pocket_Docket</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="gender">
+        <item> M </item>
+        <item> F </item>
+    </string-array>
+
+    <string-array name="designation">
+        <item>Senior Developer</item>
+        <item>Junior Developer</item>
+        <item>Trainee</item>
+    </string-array>
+
+    <string name="title_activity_developer_dashboard">DeveloperDashboardActivity</string>
+
+    <!-- HINTS -->
+    <string name="hintTitle"><i><small>Project Name</small></i></string>
+    <string name="hintModuleTitle"><i><small>Module Name</small></i></string>
+    <string name="hintType"><i><small>Project Type(Technology)</small></i></string>
+    <string name="hintDescrpition"><i><small>Description</small></i></string>
+    <string name="hintStart"><i><small>Select Start Date</small></i></string>
+    <string name="hintComplete"><i><small>Select Completion Date</small></i></string>
+    <string name="hintFirstName"><i><small>First Name</small></i></string>
+    <string name="hintLastName"><i><small>Last Name</small></i></string>
+    <string name="hintBirthDate"><i><small>Select BirthDate</small></i></string>
+    <string name="hintContact"><i><small>Contact</small></i></string>
+    <string name="hintEmailid"><i><small>E-Mail ID</small></i></string>
+    <string name="hintNewUserName"><small><i>New UserName</i></small></string>
+    <string name="hintPassword"><i><small>Password</small></i></string>
+    <string name="hintReenter"><i><small>Re-Enter Password</small></i></string>
+
+    <string name="forgot"><i><u>Forgot Password?</u></i></string>
+    <string name="na"><i>N/A</i></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

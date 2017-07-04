@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/member" android:checkableBehavior="single">
+        <item android:id="@+id/registerMember" android:icon="@mipmap/register"
+            android:title="Register Member" />
+        <item android:id="@+id/viewMembers" android:icon="@mipmap/view"
+            android:title="View Members" />
+    </group>
+
+
+    <group android:id="@+id/project" android:checkableBehavior="single">
+        <item android:id="@+id/newProject" android:icon="@mipmap/add"
+            android:title="New Project" />
+
+    </group>
+
+    <group android:id="@+id/signout">
+        <item android:id="@+id/logout" android:icon="@mipmap/logout" android:title="Logout">
+
+        </item>
+    </group>
+</menu>
