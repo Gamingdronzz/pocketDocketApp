@@ -19,7 +19,6 @@ import com.example.hp.pocket_docket.R;
 import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
 import com.example.hp.pocket_docket.beans.Member;
 import com.example.hp.pocket_docket.beans.Module;
-import com.example.hp.pocket_docket.beans.Project;
 import com.example.hp.pocket_docket.httpRequestProcessor.HTTPRequestProcessor;
 import com.example.hp.pocket_docket.networkConnection.Network;
 
@@ -44,7 +43,6 @@ public class AssignMembersFragment extends Fragment {
     private String sid, sstart, send, sdesc;
     private String[] mlist;
     boolean success;
-    private Project p;
     private Module m;
     private Member member;
     private ArrayList<Member> memberListing, currentMemberList;
@@ -54,21 +52,23 @@ public class AssignMembersFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.assign_members_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_assign_members, container, false);
 
         pro = (TextView) view.findViewById(R.id.assignProject);
         mod = (TextView) view.findViewById(R.id.assignModule);
         current = (TextView) view.findViewById(R.id.currentMembers);
         lv = (ListView) view.findViewById(R.id.selectMembers);
         btn = (Button) view.findViewById(R.id.assignSubmit);
-       /* fab= (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
-*/
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+
         Bundle bundle = this.getArguments();
-        p = bundle.getParcelable("Project");
         m = bundle.getParcelable("Module");
-        pro.setText(pro.getText() + p.getTitle());
+
+        pro.setText(pro.getText() + m.getTitle());
         mod.setText(mod.getText() + m.getMtitle());
+        fab.setVisibility(View.INVISIBLE);
+        getActivity().findViewById(R.id.ProjectList).setVisibility(View.GONE);
 
         httpRequestProcessor = new HTTPRequestProcessor();
         apiConfiguration = new APIConfiguration();
@@ -111,11 +111,27 @@ public class AssignMembersFragment extends Fragment {
         return view;
     }
 
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().findViewById(R.id.ProjectList).setVisibility(View.VISIBLE);
+        fab.setVisibility(View.VISIBLE);
+    }
+
     private class GetCurrentMembersTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
             url2 = baseURL + "SprintAPI/GetSprintListing/" + params[0];
-            res = httpRequestProcessor.gETRequestProcessor(url2);
+            try {
+                res = httpRequestProcessor.gETRequestProcessor(url2);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -160,7 +176,11 @@ public class AssignMembersFragment extends Fragment {
     private class LoadMemberTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            res = httpRequestProcessor.gETRequestProcessor(url1);
+            try {
+                res = httpRequestProcessor.gETRequestProcessor(url1);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -209,6 +229,7 @@ public class AssignMembersFragment extends Fragment {
         }
 
     }
+
     private class AssignTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -234,6 +255,8 @@ public class AssignMembersFragment extends Fragment {
 
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
 

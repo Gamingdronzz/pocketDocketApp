@@ -3,26 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dddddd"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:background="@color/colorBlackAlpha">
 
     <TextView
         android:id="@+id/detailName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:textColor="@color/colorHead"
+        android:textColor="@color/colorRed"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textAlignment="center"
         android:textSize="25sp" />
 
     <ListView
         android:id="@+id/moduleList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/detailName"
-        android:background="@android:color/transparent"
         android:clickable="true"
-        android:divider="#555555"
-        android:dividerHeight="0.5dp" />
+        android:background="@color/colorWhite"
+        android:divider="@color/colorBlackAlpha"
+        android:dividerHeight="10dp" />
 
     <TextView
         android:id="@+id/loading"
@@ -31,8 +35,8 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
         android:textAlignment="center"
-        android:textColor="@color/colorText"
-        android:textSize="20sp" />
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp" />
 
 
 </RelativeLayout>

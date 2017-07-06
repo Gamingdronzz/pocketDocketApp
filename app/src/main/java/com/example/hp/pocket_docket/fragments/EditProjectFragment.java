@@ -48,9 +48,8 @@ public class EditProjectFragment extends Fragment {
         start = (TextView) view.findViewById(R.id.newProjectStart);
         end = (TextView) view.findViewById(R.id.newProjectEnd);
         btn = (Button) view.findViewById(R.id.btnEditProject);
-        /*fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
-*/
         httpRequestProcessor = new HTTPRequestProcessor();
         apiConfiguration = new APIConfiguration();
         baseURL = apiConfiguration.getApi();
@@ -120,6 +119,16 @@ public class EditProjectFragment extends Fragment {
         return view;
     }
 
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    public void onStop() {
+        super.onStop();
+        fab.setVisibility(View.VISIBLE);
+    }
+
     private class EditProject extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -135,6 +144,8 @@ public class EditProjectFragment extends Fragment {
                 jsonResponseString = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, url);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }

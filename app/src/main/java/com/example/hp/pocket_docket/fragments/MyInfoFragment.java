@@ -51,7 +51,11 @@ public class MyInfoFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "MemberAPI/GetMemberDetail/" + SavedSharedPreference.getCode(getContext());
-            res = req.gETRequestProcessor(url);
+            try {
+                res = req.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(),"Check your Internet Connection",Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 

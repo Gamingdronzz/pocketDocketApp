@@ -10,9 +10,10 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/colorBack"
+            android:layout_weight="1.5"
+            android:background="@color/colorGrey"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -23,8 +24,8 @@
                 android:layout_gravity="bottom"
                 android:text="startDate"
                 android:textAlignment="center"
-                android:textColor="@color/colorText"
-                android:textSize="14sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/proEndDate"
@@ -33,14 +34,15 @@
                 android:layout_gravity="top"
                 android:text="endDate"
                 android:textAlignment="center"
-                android:textColor="@color/colorText"
-                android:textSize="14sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_weight="2.5"
             android:orientation="vertical"
             android:paddingTop="@dimen/activity_vertical_margin">
 
@@ -55,9 +57,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="ProjectName"
-                    android:textColor="@color/colorHead"
+                    android:textColor="@color/colorRed"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
+
                 <ImageView
                     android:id="@+id/priority"
                     android:layout_width="0dp"
@@ -79,6 +82,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:background="@color/colorYellow"
+                android:paddingLeft="5sp"
                 android:paddingRight="5sp"
                 android:text="Language"
                 android:textColor="@color/colorText"

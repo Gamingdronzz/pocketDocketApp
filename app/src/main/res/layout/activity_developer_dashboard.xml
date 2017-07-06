@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="#b2beb5"
+        android:background="@drawable/back"
         app:headerLayout="@layout/nav_header_developer_dashboard"
         app:menu="@menu/activity_developer_dashboard_drawer" />
 

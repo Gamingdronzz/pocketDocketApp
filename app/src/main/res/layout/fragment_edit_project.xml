@@ -4,10 +4,9 @@
     android:id="@+id/activity_edit_project"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/colorBlackAlpha"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="com.example.hp.pocket_docket.activity.EditProjectActivity">
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -30,16 +29,16 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintTitle"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                android:typeface="serif" />
+                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -50,16 +49,16 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintType"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                android:typeface="serif" />
+                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -70,16 +69,16 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintDescrpition"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                android:typeface="serif" />
+                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -90,18 +89,17 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:drawableEnd="@mipmap/calender"
-                android:drawableTint="@color/colorHead"
                 android:hint="@string/hintStart"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                android:typeface="serif" />
+                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -112,11 +110,10 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:drawableEnd="@mipmap/calender"
-                android:drawableTint="@color/colorHead"
                 android:hint="@string/hintComplete"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                android:typeface="serif" />
+                 />
         </LinearLayout>
 
         <Button
@@ -126,9 +123,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:text="UPDATE"
-            android:textColor="@color/colorHead"
-            android:textSize="25sp"
-            android:typeface="serif" />
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+             />
 
     </LinearLayout>
 

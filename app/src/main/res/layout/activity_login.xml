@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:text="@string/forgot"
-            android:textColor="@color/colorHead"
+            android:textColor="@color/colorRed"
             android:textSize="15sp"
              />
     </LinearLayout>

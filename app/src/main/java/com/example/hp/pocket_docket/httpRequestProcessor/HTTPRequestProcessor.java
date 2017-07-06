@@ -1,16 +1,11 @@
 package com.example.hp.pocket_docket.httpRequestProcessor;
 
-import android.util.Log;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -23,7 +18,7 @@ public class HTTPRequestProcessor {
     StringBuilder sb;
 
     // This method will process POST request and  return a response String
-    public String pOSTRequestProcessor(String jsonString, String requestURL) {
+    public String pOSTRequestProcessor(String jsonString, String requestURL) throws Exception {
         sb = new StringBuilder();
         try {
             // Sending data to API
@@ -48,23 +43,18 @@ public class HTTPRequestProcessor {
                 sb.append(responseData);
                 responseData = br.readLine();
             }
-            // Reading the response code
-            int responseCode = httpURLConnection.getResponseCode();
-            Log.d("Response Code", String.valueOf(responseCode));
-            br.close();
-            httpURLConnection.disconnect();
+             httpURLConnection.disconnect();
 
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            throw new Exception();
         }
         jsonResponseString = sb.toString();
         return jsonResponseString;
     }
 
     // This method will process http GET request and return json response string
-    public String gETRequestProcessor(String requestURL) {
+    public String gETRequestProcessor(String requestURL) throws Exception {
         sb = new StringBuilder();
         try {
             URL url = new URL(requestURL);
@@ -80,12 +70,9 @@ public class HTTPRequestProcessor {
             }
             br.close();
             urlConnection.disconnect();
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            throw new Exception();
         }
         jsonResponseString = sb.toString();
         return jsonResponseString;

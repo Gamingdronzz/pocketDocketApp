@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hp.pocket_docket.R;
 import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
@@ -24,7 +26,8 @@ import org.json.JSONObject;
  */
 
 public class HomeFragment extends Fragment {
-    private TextView active, total, complete;
+    private TextView active, total, complete,extra;
+    ImageView status;
     private HTTPRequestProcessor req;
     private APIConfiguration api;
     private String baseURL, url, res;
@@ -36,8 +39,10 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         active = (TextView) view.findViewById(R.id.activeProject);
+        extra= (TextView) view.findViewById(R.id.extra);
         total = (TextView) view.findViewById(R.id.totalProjects);
         complete = (TextView) view.findViewById(R.id.completedProjects);
+        status= (ImageView) view.findViewById(R.id.status);
         req = new HTTPRequestProcessor();
         api = new APIConfiguration();
         baseURL = api.getApi();
@@ -57,7 +62,11 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            res = req.gETRequestProcessor(url);
+            try {
+                res = req.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(),"Check your Internet Connection",Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -78,13 +87,17 @@ public class HomeFragment extends Fragment {
                             }
                         }
                     }
-                    total.setText("Total Projects:   " + responseData.length());
-                    complete.setText("Projects Complete:   " + count);
+                    total.setText("  Total Projects: " + responseData.length());
+                    complete.setText("  Projects Complete: " + count);
                 }
                 if (SavedSharedPreference.getFlag(getContext())) {
-                    active.setText("ACTIVE\nModule: " + SavedSharedPreference.getCurModule(getContext()) + "\nProject: " + SavedSharedPreference.getCurPoject(getContext()));
+                    status.setImageResource(R.mipmap.active);
+                    active.setText("ACTIVE");
+                    extra.setText("Module: " + SavedSharedPreference.getCurModule(getContext()) + "\nProject: " + SavedSharedPreference.getCurPoject(getContext()));
                 } else {
-                    active.setText("NOT ACTIVE!\nView your Projects and select a Project to Work");
+                    status.setImageResource(R.mipmap.inactive);
+                    active.setText("NOT ACTIVE");
+                    extra.setText("View your Projects and select a Project to Work");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

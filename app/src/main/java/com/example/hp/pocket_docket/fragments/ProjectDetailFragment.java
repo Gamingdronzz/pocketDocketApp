@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.pocket_docket.R;
+import com.example.hp.pocket_docket.activity.AdminDashboardActivity;
 import com.example.hp.pocket_docket.adapter.ModuleAdapter;
 import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
 import com.example.hp.pocket_docket.beans.Module;
@@ -52,6 +53,7 @@ public class ProjectDetailFragment extends Fragment {
     private Bundle bundle;
     private AlertDialog statusDialog;
     private FloatingActionButton fab;
+    private FragmentTransaction ft;
 
     @Nullable
     @Override
@@ -60,10 +62,9 @@ public class ProjectDetailFragment extends Fragment {
         name = (TextView) view.findViewById(R.id.detailName);
         lv1 = (ListView) view.findViewById(R.id.moduleList);
         loading = (TextView) view.findViewById(R.id.loading);
-       /* fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setVisibility(View.VISIBLE);
-        fab.setImageResource(R.mipmap.addmod);
-       */ bundle = this.getArguments();
+        bundle = this.getArguments();
         p = bundle.getParcelable("Project");
         pname = p.getTitle();
         ID = p.getId();
@@ -77,18 +78,21 @@ public class ProjectDetailFragment extends Fragment {
         apiConfiguration = new APIConfiguration();
         baseURL = apiConfiguration.getApi();
 
-      /*  fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment f = new AddModuleFragment();
-                f.setArguments(bundle);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_admin_dashboard, f);
-                ft.commit();
-                ft.addToBackStack(null);
+                try {
+                    Fragment f = new AddModuleFragment();
+                    f.setArguments(bundle);
+                    ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_admin_dashboard, f);
+                    ft.commit();
+                    ft.addToBackStack(null);
+                } catch (Exception e) {
+
+                }
             }
         });
-*/
         if (Network.isNetworkAvailable(getContext())) {
             new LoadModuleListTask().execute(ID);
         } else
@@ -97,10 +101,26 @@ public class ProjectDetailFragment extends Fragment {
         return view;
     }
 
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.VISIBLE);
+    }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroyView() {
+        super.onDestroyView();
+        fab.setOnClickListener(null);
+        final AdminDashboardActivity mainActivity = (AdminDashboardActivity) getActivity();
+        mainActivity.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment f = new AddProjectFragment();
+                ft = mainActivity.getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_admin_dashboard, f);
+                ft.commit();
+                ft.addToBackStack(null);
+            }
+        });
         getActivity().findViewById(R.id.ProjectList).setVisibility(View.VISIBLE);
     }
 
@@ -115,25 +135,17 @@ public class ProjectDetailFragment extends Fragment {
         AdapterView.AdapterContextMenuInfo info1 = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index1 = info1.position;
         m = moduleList.get(index1);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("Project", p);
-        bundle.putParcelable("Module", m);
         switch (item.getItemId()) {
             case R.id.edit1:
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("Project", p);
+                bundle.putParcelable("Module", m);
                 Fragment f1 = new EditModuleFragment();
                 f1.setArguments(bundle);
                 FragmentTransaction ft1 = getActivity().getSupportFragmentManager().beginTransaction();
                 ft1.replace(R.id.content_admin_dashboard, f1);
                 ft1.commit();
                 ft1.addToBackStack(null);
-                return true;
-            case R.id.assign:
-                Fragment f = new AssignMembersFragment();
-                f.setArguments(bundle);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_admin_dashboard, f);
-                ft.commit();
-                ft.addToBackStack(null);
                 return true;
             case R.id.status:
                 if (!Validator.checkStarted(m.getMstart()))
@@ -183,7 +195,11 @@ public class ProjectDetailFragment extends Fragment {
         protected String doInBackground(String... params) {
             id = params[0];
             url = baseURL + "SprintAPI/GetProjectSprintListing/" + id;
-            res = httpRequestProcessor.gETRequestProcessor(url);
+            try {
+                res = httpRequestProcessor.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -216,6 +232,7 @@ public class ProjectDetailFragment extends Fragment {
                             m.setMstart(start);
                             m.setMend(end);
                             m.setTitle(p.getTitle());
+                            m.setId(p.getId());
                             moduleList.add(m);
                         }
                         adapter = new ModuleAdapter(getContext(), moduleList);
@@ -233,7 +250,11 @@ public class ProjectDetailFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "SprintAPI/UpdateSprintStatus/" + params[0] + "/" + params[1];
-            res = httpRequestProcessor.pOSTRequestProcessor("", url);
+            try {
+                res = httpRequestProcessor.pOSTRequestProcessor("", url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.hp.pocket_docket.R;
 import com.example.hp.pocket_docket.adapter.ModuleMemberAdapter;
 import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
 import com.example.hp.pocket_docket.beans.Member;
+import com.example.hp.pocket_docket.beans.Module;
 import com.example.hp.pocket_docket.httpRequestProcessor.HTTPRequestProcessor;
 
 import org.json.JSONArray;
@@ -31,43 +33,46 @@ import java.util.ArrayList;
 public class ModuleDetailFragment extends Fragment {
     private ListView lv3;
     private TextView tv3, loading;
-    private String sprintId, url, baseURL, res;
+    private String url, baseURL, res;
     private HTTPRequestProcessor httpRequestProcessor;
     private APIConfiguration apiConfiguration;
     private Member m;
     private ModuleMemberAdapter adapter;
-    private ArrayList<Member> allMemberList = new ArrayList<Member>();
-    private ArrayList<Member> sprintMemberList = new ArrayList<>();
-    private ArrayList<Member> infoAddedList = new ArrayList<>();
+    private ArrayList<Member> allMemberList;
+    private ArrayList<Member> sprintMemberList;
+    private ArrayList<Member> infoAddedList;
     private Bundle bundle;
     private FloatingActionButton fab;
+    Module module;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_module_detail, container, false);
+
         bundle = this.getArguments();
-        sprintId = bundle.getString("Id");
+        module = bundle.getParcelable("Module");
+
         lv3 = (ListView) view.findViewById(R.id.memberList);
         tv3 = (TextView) view.findViewById(R.id.moduleName);
-        tv3.setText("Module: " + bundle.getString("Name"));
         loading = (TextView) view.findViewById(R.id.loading);
-      /*  fab= (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
-      */  getActivity().findViewById(R.id.ProjectList).setVisibility(View.GONE);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+        tv3.setText(module.getMtitle() + " : " + module.getTitle());
+        fab.setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.ProjectList).setVisibility(View.GONE);
 
         httpRequestProcessor = new HTTPRequestProcessor();
         apiConfiguration = new APIConfiguration();
         baseURL = apiConfiguration.getApi();
         new GetMemberListTask().execute();
 
-        /*fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle1 = new Bundle();
-                bundle.putParcelable("Project", p);
-                bundle.putParcelable("Module", m);
+                bundle1.putParcelable("Module", module);
                 Fragment f = new AssignMembersFragment();
                 f.setArguments(bundle1);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -75,10 +80,14 @@ public class ModuleDetailFragment extends Fragment {
                 ft.commit();
                 ft.addToBackStack(null);
             }
-        });*/
+        });
         return view;
     }
 
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void onStop() {
@@ -95,7 +104,11 @@ public class ModuleDetailFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "MemberAPI/GetApplicationMemberList";
-            res = httpRequestProcessor.gETRequestProcessor(url);
+            try {
+                res = httpRequestProcessor.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -107,13 +120,14 @@ public class ModuleDetailFragment extends Fragment {
                 boolean success = jsonObject.getBoolean("success");
                 if (success) {
                     JSONArray responseData = jsonObject.getJSONArray("responseData");
+                    allMemberList = new ArrayList<>();
                     for (int i = 0; i < responseData.length(); i++) {
                         m = new Member();
                         JSONObject object = responseData.getJSONObject(i);
                         String contact = object.getString("MobileNo");
                         String desig = object.getString("Designation");
                         String code = object.getString("MemberId");
-                        String empId=object.getString("MemberCode");
+                        String empId = object.getString("MemberCode");
                         m.setId(code);
                         m.setContact(contact);
                         m.setDesig(desig);
@@ -130,14 +144,18 @@ public class ModuleDetailFragment extends Fragment {
 
     private void updateList(ArrayList<Member> ml) {
         allMemberList = ml;
-        new MemberInfoTask().execute(sprintId);
+        new MemberInfoTask().execute(module.getMno());
     }
 
     private class MemberInfoTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "SprintAPI/GetSprintListing/" + params[0];
-            res = httpRequestProcessor.gETRequestProcessor(url);
+            try {
+                res = httpRequestProcessor.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -156,6 +174,7 @@ public class ModuleDetailFragment extends Fragment {
                         loading.setText("");
                         tv3.setText("No Members in Module!");
                     } else {
+                        sprintMemberList = new ArrayList<Member>();
                         for (int j = 0; j < memberlist.length(); j++) {
                             m = new Member();
                             JSONObject object = memberlist.getJSONObject(j);
@@ -190,21 +209,22 @@ public class ModuleDetailFragment extends Fragment {
         protected String doInBackground(ArrayList<Member>... params) {
             String result;
             baseURL = apiConfiguration.getApi();
+            infoAddedList = new ArrayList<>();
             for (Member m : params[0]) {
                 url = baseURL + "SprintMemberAssociationAPI/GetMySprintList/" + m.getId();
-                result = httpRequestProcessor.gETRequestProcessor(url);
                 try {
+                    result = httpRequestProcessor.gETRequestProcessor(url);
                     JSONObject jsonObject = new JSONObject(result);
-                    Member member=new Member();
+                    Member member = new Member();
                     JSONArray responseData = jsonObject.getJSONArray("responseData");
                     boolean success = jsonObject.getBoolean("success");
                     if (success) {
                         for (int i = 0; i < responseData.length(); i++) {
                             JSONObject object = responseData.getJSONObject(i);
                             String sid = object.getString("SprintId");
-                            if (sid.equals(sprintId)) {
+                            if (sid.equals(module.getMno())) {
                                 member.setId(m.getId());
-                                member.setName(m.getName(),"");
+                                member.setName(m.getName(), "");
                                 member.setEmpId(m.getEmpId());
                                 member.setContact(m.getContact());
                                 member.setDesig(m.getDesig());
@@ -219,6 +239,8 @@ public class ModuleDetailFragment extends Fragment {
                         Toast.makeText(getContext(), "Some Error Occured!", Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
                 }
             }
             return null;
@@ -233,7 +255,7 @@ public class ModuleDetailFragment extends Fragment {
 
     private void update(ArrayList<Member> ml) {
         infoAddedList = ml;
-        adapter = new ModuleMemberAdapter(getContext(),infoAddedList);
+        adapter = new ModuleMemberAdapter(getContext(), infoAddedList);
         lv3.setAdapter(adapter);
     }
 }

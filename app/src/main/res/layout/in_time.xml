@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:text="CLOCK IN"
         android:gravity="center_horizontal"
-        android:textColor="@color/colorHead"
+        android:textColor="@color/colorRed"
         android:textSize="50sp" />
 
     <LinearLayout
@@ -35,7 +35,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:text="8:05AM"
-            android:textColor="@color/colorHead"
+            android:textColor="@color/colorRed"
             android:textSize="40sp" />
 
 

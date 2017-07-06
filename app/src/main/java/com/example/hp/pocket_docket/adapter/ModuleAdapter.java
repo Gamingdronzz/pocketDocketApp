@@ -69,6 +69,8 @@ public class ModuleAdapter extends BaseAdapter {
         name.setText(m.getMtitle());
         if (Validator.endNear(m.getMend()))
             high.setImageResource(R.mipmap.high);
+        if(Validator.checkEnded(m.getMend()))
+            high.setImageResource(R.mipmap.done);
         switch (Integer.valueOf(m.getStatus())) {
             case 1:
                 pb.setProgress(10);
@@ -86,8 +88,8 @@ public class ModuleAdapter extends BaseAdapter {
                 pb.setProgress(0);
 
         }
-        descp.setText("Brief: " + "\t" + m.getMdesc());
-        duration.setText("Duration:\t" + Format.formatDate(m.getMstart()) + " - " + Format.formatDate(m.getMend()));
+        descp.setText(m.getMdesc());
+        duration.setText(Format.formatDate(m.getMstart()) + " - " + Format.formatDate(m.getMend()));
 
         Button detail = (Button) convertView.findViewById(R.id.btnDetail);
         detail.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +99,7 @@ public class ModuleAdapter extends BaseAdapter {
                                               final AdapterView adapterView = (AdapterView) parent;
                                               final int pos = adapterView.getPositionForView(v);
                                               Module m = modulelist.get(pos);
-                                              bundle.putString("Id", m.getMno());
-                                              bundle.putString("Name", m.getMtitle());
+                                              bundle.putParcelable("Module",m);
                                           }
                                           Fragment f2 = new ModuleDetailFragment();
                                           f2.setArguments(bundle);

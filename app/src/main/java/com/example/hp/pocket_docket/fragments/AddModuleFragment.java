@@ -54,9 +54,8 @@ public class AddModuleFragment extends Fragment {
         Bundle bundle = this.getArguments();
         p1 = bundle.getParcelable("Project");
         proName.setText(proName.getText() + "\t" + p1.getTitle());
-        /*fab= (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
-*/
 
         httpRequestProcessor = new HTTPRequestProcessor();
         apiConfiguration = new APIConfiguration();
@@ -117,6 +116,16 @@ public class AddModuleFragment extends Fragment {
         return view;
     }
 
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    public void onStop() {
+        super.onStop();
+        fab.setVisibility(View.VISIBLE);
+    }
+
     public class AddModule extends AsyncTask<String, String, String> {
 
         @Override
@@ -133,6 +142,8 @@ public class AddModuleFragment extends Fragment {
                 jsonResponseString = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, url1);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check Your Internet Connection", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }

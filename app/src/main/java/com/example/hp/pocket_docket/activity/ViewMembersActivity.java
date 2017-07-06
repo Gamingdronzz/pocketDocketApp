@@ -51,7 +51,11 @@ public class ViewMembersActivity extends AppCompatActivity {
     public class ViewTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            res = req.gETRequestProcessor(url);
+            try {
+                res = req.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(ViewMembersActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 

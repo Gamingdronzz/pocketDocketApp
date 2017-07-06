@@ -52,7 +52,7 @@ public class SavedSharedPreference {
     }
 
     public static String getType(Context context) {
-        return getSharedPreferences(context).getString(PREF_TYPE, "");
+        return getSharedPreferences(context).getString(PREF_TYPE, "4");
     }
 
     public static void setCode(Context context, String code) {
@@ -62,7 +62,7 @@ public class SavedSharedPreference {
     }
 
     public static String getCode(Context context) {
-        return getSharedPreferences(context).getString(PREF_CODE, "4");
+        return getSharedPreferences(context).getString(PREF_CODE, " ");
     }
 
     public static void setFlag(Context context, boolean flag) {

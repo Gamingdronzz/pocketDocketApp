@@ -37,11 +37,11 @@ public class EditModuleFragment extends Fragment {
     private Module m;
     private boolean enabled;
     private FloatingActionButton fab;
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_edit_module, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_module, container, false);
 
         project = (TextView) view.findViewById(R.id.proView);
         duration = (TextView) view.findViewById(R.id.proDuration);
@@ -50,15 +50,14 @@ public class EditModuleFragment extends Fragment {
         end = (TextView) view.findViewById(R.id.addModuleEnd);
         start = (TextView) view.findViewById(R.id.addModuleStart);
         btn = (Button) view.findViewById(R.id.btnAddModule);
-       /* fab= (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
-*/
         httpRequestProcessor = new HTTPRequestProcessor();
         apiConfiguration = new APIConfiguration();
         baseURL = apiConfiguration.getApi();
         url1 = baseURL + "SprintAPI/AddNewSprint";
 
-        Bundle bundle=this.getArguments();
+        Bundle bundle = this.getArguments();
         p = bundle.getParcelable("Project");
         m = bundle.getParcelable("Module");
         project.setText(project.getText() + p.getTitle());
@@ -120,9 +119,20 @@ public class EditModuleFragment extends Fragment {
 
             }
         });
-        
+
         return view;
     }
+
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    public void onStop() {
+        super.onStop();
+        fab.setVisibility(View.VISIBLE);
+    }
+
     private class EditModule extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -139,6 +149,8 @@ public class EditModuleFragment extends Fragment {
                 jsonResponseString = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, url1);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -159,5 +171,5 @@ public class EditModuleFragment extends Fragment {
             }
         }
     }
-  
+
 }

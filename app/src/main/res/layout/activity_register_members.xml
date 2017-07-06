@@ -4,7 +4,7 @@
     android:id="@+id/activity_register_members"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/colorBlackAlpha"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -23,14 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="PERSONAL DETAILS"
-            android:textColor="@color/colorHead"
-            android:textSize="15sp" />
+            android:textColor="@color/colorRed"
+            android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <EditText
@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintFirstName"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
             <EditText
@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintLastName"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:background="@android:color/transparent"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
             <TextView
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <TextView
@@ -122,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <TextView
@@ -131,11 +131,10 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:drawableEnd="@mipmap/calender"
-                android:drawableTint="@color/colorHead"
                 android:gravity="center_vertical"
                 android:hint="@string/hintBirthDate"
                 android:inputType="date"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -144,7 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <EditText
@@ -153,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintContact"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -161,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <EditText
@@ -170,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintEmailid"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -178,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorWhiteAlpha" />
 
 
         <TextView
@@ -187,14 +186,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:text="LOGIN DETAILS"
-            android:textColor="@color/colorHead"
-            android:textSize="15sp" />
+            android:textColor="@color/colorRed"
+            android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <EditText
@@ -203,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintNewUserName"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -211,7 +210,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <EditText
@@ -221,7 +220,7 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/hintPassword"
                 android:inputType="textPassword"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -229,7 +228,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <EditText
@@ -239,7 +238,7 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/hintReenter"
                 android:inputType="textPassword"
-                android:textColor="@color/colorText"
+                android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -251,7 +250,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="REGISTER"
-            android:textColor="@color/colorHead"
+            android:textColor="@color/colorRed"
             android:textSize="15sp" />
 
 

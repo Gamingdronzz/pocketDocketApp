@@ -167,7 +167,11 @@ public class ModuleMemberAdapter extends BaseAdapter {
         protected String doInBackground(String... params) {
             baseURL = apiConfiguration.getApi();
             url = baseURL + "SprintMemberAssociationAPI/DeleteSprintAssociation/" + params[0];
-            res = httpRequestProcessor.gETRequestProcessor(url);
+            try {
+                res = httpRequestProcessor.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(context,"Check your Internet Connection",Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 

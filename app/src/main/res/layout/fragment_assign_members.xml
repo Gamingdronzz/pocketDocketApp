@@ -4,10 +4,9 @@
     android:id="@+id/activity_assign_module"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/colorBlackAlpha"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="com.example.hp.pocket_docket.activity.AssignModuleActivity">
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <LinearLayout
         android:id="@+id/layout"
@@ -19,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <TextView
@@ -27,8 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Project: "
-                android:textColor="@color/colorText"
-                android:textSize="20sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -37,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorBack"
+            android:background="@color/colorGrey"
             android:orientation="horizontal">
 
             <TextView
@@ -45,8 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Module: "
-                android:textColor="@color/colorText"
-                android:textSize="20sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -55,15 +54,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="Current Members:"
-            android:textColor="@color/colorText"
+            android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/currentMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBack"
-            android:textColor="@color/colorText"
+            android:background="@color/colorGrey"
+            android:textColor="@color/colorWhite"
             android:textSize="15sp" />
 
         <TextView
@@ -71,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="Select New Members"
-            android:textColor="@color/colorText"
+            android:textColor="@color/colorWhite"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -84,7 +83,7 @@
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
         android:text="ASSIGN"
-        android:textColor="@color/colorHead"
+        android:textColor="@color/colorRed"
         android:textSize="20sp" />
 
     <ListView
@@ -93,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/assignSubmit"
         android:layout_below="@id/layout"
-        android:background="@color/colorBack" />
+        android:background="@color/colorGrey" />
 
 
 </RelativeLayout>

@@ -5,9 +5,6 @@
         android:id="@+id/edit1"
         android:title="Edit Module" />
     <item
-        android:id="@+id/assign"
-        android:title="Assign Members"/>
-    <item
         android:id="@+id/status"
         android:title="Update Progress" />
 </menu>

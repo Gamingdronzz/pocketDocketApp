@@ -5,18 +5,22 @@
     android:id="@+id/content_admin_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/colorBlackAlpha"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.hp.pocket_docket.activity.AdminDashboardActivity"
     tools:showIn="@layout/app_bar_admin_dashboard">
 
     <ListView
         android:id="@+id/ProjectList"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#555555"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:divider="@color/colorBlackAlpha"
         android:clickable="true"
-        android:dividerHeight="0.5dp">
+        android:dividerHeight="10dp">
 
 
     </ListView>
@@ -28,8 +32,8 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
         android:textAlignment="center"
-        android:textColor="@color/colorText"
-        android:textSize="20sp" />
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp" />
 
 
 </RelativeLayout>

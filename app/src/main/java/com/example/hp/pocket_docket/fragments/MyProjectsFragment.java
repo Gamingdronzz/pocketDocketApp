@@ -30,8 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -157,7 +155,7 @@ public class MyProjectsFragment extends Fragment {
 
 
         //----------------------------------click on button to stop working---------------------------------------------
-        fab.setOnClickListener(new View.OnClickListener() {
+      /*  fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 {
@@ -221,21 +219,24 @@ public class MyProjectsFragment extends Fragment {
                 }
             }
         });
-
-        return view;
+      */  return view;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        fab.setVisibility(View.INVISIBLE);
+        //fab.setVisibility(View.INVISIBLE);
     }
 
     //-------------------------------------------------------ProjectList---------------------------------------------------------------
     private class GetProjects extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            res = req.gETRequestProcessor(url1);
+            try {
+                res = req.gETRequestProcessor(url1);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -272,7 +273,11 @@ public class MyProjectsFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            res = req.gETRequestProcessor(url);
+            try {
+                res = req.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -334,18 +339,14 @@ public class MyProjectsFragment extends Fragment {
                         txtStatus.setText("No Modules Assigned");
                     txtStatus2.setText(" ");
                 }
-            } catch (
-                    JSONException e
-                    )
-
-            {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
     //-------------------------------------------Update Time------------------------------------------------------------------------
-    private class UpdateTimeTask extends AsyncTask<String, String, String> {
+    /*private class UpdateTimeTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
             JSONObject jsonObject = new JSONObject();
@@ -359,6 +360,8 @@ public class MyProjectsFragment extends Fragment {
                 jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, url2);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -413,7 +416,11 @@ public class MyProjectsFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "SprintMemberAssociationAPI/UpdateSprintStatus/" + SavedSharedPreference.getAscId(getContext()) + "/" + params[0];
-            res = req.gETRequestProcessor(url);
+            try {
+                res = req.gETRequestProcessor(url);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 
@@ -432,5 +439,5 @@ public class MyProjectsFragment extends Fragment {
             }
 
         }
-    }
+    }*/
 }

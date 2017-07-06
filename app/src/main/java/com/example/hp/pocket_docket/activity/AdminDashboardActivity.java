@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +27,6 @@ import com.example.hp.pocket_docket.adapter.ProjectAdapter;
 import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
 import com.example.hp.pocket_docket.beans.Project;
 import com.example.hp.pocket_docket.formattingAndValidation.Validator;
-import com.example.hp.pocket_docket.fragments.AddModuleFragment;
 import com.example.hp.pocket_docket.fragments.AddProjectFragment;
 import com.example.hp.pocket_docket.fragments.EditProjectFragment;
 import com.example.hp.pocket_docket.fragments.ProjectDetailFragment;
@@ -53,7 +51,8 @@ public class AdminDashboardActivity extends AppCompatActivity
     private Project project;
     private ArrayList<Project> al;
     private ProjectAdapter adapter;
-    private FloatingActionButton fab;
+    public FloatingActionButton fab;
+    private FragmentTransaction ft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +74,7 @@ public class AdminDashboardActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         tv = (TextView) header.findViewById(R.id.txtAdminName);
         tv.setText(SavedSharedPreference.getName(AdminDashboardActivity.this));
-       // fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         loading = (TextView) findViewById(R.id.loading);
         lv = (ListView) findViewById(R.id.ProjectList);
         registerForContextMenu(lv);
@@ -108,24 +107,23 @@ public class AdminDashboardActivity extends AppCompatActivity
             }
         });
 
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            public void onBackStackChanged() {
-                /*fab.setVisibility(View.VISIBLE);
-                fab.setImageResource(R.mipmap.add);
-                */new ShowProjectListTask().execute();
-            }
-        });
-
-       /* fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment f = new AddProjectFragment();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_admin_dashboard, f);
                 ft.commit();
                 ft.addToBackStack(null);
             }
-        });*/
+        });
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            public void onBackStackChanged() {
+                new ShowProjectListTask().execute();
+            }
+        });
+
     }
 
 
@@ -153,9 +151,7 @@ public class AdminDashboardActivity extends AppCompatActivity
     public boolean onContextItemSelected(MenuItem item) {
         try {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            Log.d("info", String.valueOf(info));
             int index = info.position;
-            Log.d("index", String.valueOf(index));
             Project p = al.get(index);
             Bundle bundle = new Bundle();
             bundle.putParcelable("Project", p);
@@ -167,14 +163,6 @@ public class AdminDashboardActivity extends AppCompatActivity
                     ft1.replace(R.id.content_admin_dashboard, f1);
                     ft1.commit();
                     ft1.addToBackStack(null);
-                    return true;
-                case R.id.add:
-                    Fragment f = new AddModuleFragment();
-                    f.setArguments(bundle);
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_admin_dashboard, f);
-                    ft.commit();
-                    ft.addToBackStack(null);
                     return true;
                 default:
                     return super.onContextItemSelected(item);
@@ -229,7 +217,11 @@ public class AdminDashboardActivity extends AppCompatActivity
 
         @Override
         protected String doInBackground(String... params) {
-            res = req.gETRequestProcessor(url1);
+            try {
+                res = req.gETRequestProcessor(url1);
+            } catch (Exception e) {
+                Toast.makeText(AdminDashboardActivity.this, "Check your Internet Connection", Toast.LENGTH_LONG).show();
+            }
             return res;
         }
 

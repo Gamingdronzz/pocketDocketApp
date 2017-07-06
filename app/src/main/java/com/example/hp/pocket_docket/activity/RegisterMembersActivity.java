@@ -161,6 +161,8 @@ public class RegisterMembersActivity extends AppCompatActivity {
 
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(RegisterMembersActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }

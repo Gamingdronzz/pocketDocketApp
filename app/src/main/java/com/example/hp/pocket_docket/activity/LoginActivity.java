@@ -137,6 +137,8 @@ public class LoginActivity extends AppCompatActivity {
                 jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, urlLogin);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(LoginActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -189,6 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                 jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, urlForgot);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(LoginActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }

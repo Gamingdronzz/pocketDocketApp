@@ -37,20 +37,20 @@ public class AddProjectFragment extends Fragment {
     private Button btn;
     private String pTitle, pDesc, pStart, pEnd, pType;
     boolean success;
-private FloatingActionButton fab;
+    private FloatingActionButton fab;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_add_project,container,false);
+        View view = inflater.inflate(R.layout.fragment_add_project, container, false);
         title = (EditText) view.findViewById(R.id.newProjectTitle);
         type = (EditText) view.findViewById(R.id.newProjectType);
         description = (EditText) view.findViewById(R.id.newProjectDesc);
         start = (TextView) view.findViewById(R.id.newProjectStart);
         end = (TextView) view.findViewById(R.id.newProjectEnd);
         btn = (Button) view.findViewById(R.id.btnNewProject);
-      /*  fab= (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
-*/
         httpRequestProcessor = new HTTPRequestProcessor();
         apiConfiguration = new APIConfiguration();
 
@@ -111,6 +111,19 @@ private FloatingActionButton fab;
         });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        fab.setVisibility(View.VISIBLE);
+    }
+
     public class AddProject extends AsyncTask<String, String, String> {
 
         @Override
@@ -132,6 +145,8 @@ private FloatingActionButton fab;
                 jsonResponseString = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, url);
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
