@@ -5,12 +5,8 @@
     <color name="colorPrimaryDark">#565656</color>
     <color name="textColorPrimary">#f9fbe7</color>
     <color name="colorAccent">#00DEEF</color>
-
-    <color name="colorOther">#002e63</color>
+    
     <color name="colorText">#111111</color>
-    <color name="colorBack">#bebebe</color>
-    <color name="colorHead">#800000</color>
-
     <color name="colorWhite">#fafafa</color>
     <color name="colorWhiteAlpha">#f9fbe7</color>
     <color name="colorRed">#c62828</color>

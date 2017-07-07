@@ -1,110 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="10dp">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/layout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/empName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/empDesig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"/>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3.5"
+            android:id="@+id/layout5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/empName"
+            <ProgressBar
+                android:id="@+id/empStatus"
+                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:text="Name"
-                android:textColor="@color/colorRed"
-                android:textSize="15sp"
-                android:textStyle="bold"></TextView>
-
+                android:layout_gravity="top"
+                android:paddingEnd="10dp" />
 
             <TextView
-                android:id="@+id/empDesig"
+                android:id="@+id/timeSpent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:text="Desig"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
                 android:textColor="@color/colorText"
-                android:textSize="15sp"></TextView>
-
-            <LinearLayout
-                android:id="@+id/layout5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout3"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ProgressBar
-                    android:id="@+id/empStatus"
-                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:paddingRight="10dp" />
-
-                <TextView
-                    android:id="@+id/timeSpent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:text="3 hr:4 min"
-                    android:textColor="@color/colorText"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:focusable="false"
-                android:src="@mipmap/call" />
-
-            <ImageButton
-                android:id="@+id/msg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/transparent"
-                android:focusable="false"
-                android:src="@mipmap/message" />
-
-            <ImageButton
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/transparent"
-                android:focusable="false"
-                android:src="@mipmap/remove" />
-
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:src="@mipmap/call" />
+
+        <ImageButton
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:src="@mipmap/message" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:src="@mipmap/remove" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+

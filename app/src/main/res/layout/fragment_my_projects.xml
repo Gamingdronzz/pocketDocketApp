@@ -24,7 +24,7 @@
         android:background="@color/colorWhite"
         android:clickable="true"
         android:divider="@color/colorBlackAlpha"
-        android:dividerHeight="10dp"></ListView>
+        android:dividerHeight="10dp"/>
 
 
     <TextView
@@ -35,7 +35,7 @@
         android:background="@android:color/transparent"
         android:gravity="center_horizontal"
         android:paddingBottom="5dp"
-        android:textColor="@color/colorText"
+        android:textColor="@color/colorWhite"
         android:textSize="15sp" />
 
 

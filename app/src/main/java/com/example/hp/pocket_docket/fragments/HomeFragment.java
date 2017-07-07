@@ -1,5 +1,6 @@
 package com.example.hp.pocket_docket.fragments;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,12 +22,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by hp on 28-06-2017.
- */
 
 public class HomeFragment extends Fragment {
-    private TextView active, total, complete,extra;
+    private TextView active, total, complete,extra,loading;
     ImageView status;
     private HTTPRequestProcessor req;
     private APIConfiguration api;
@@ -42,6 +40,7 @@ public class HomeFragment extends Fragment {
         extra= (TextView) view.findViewById(R.id.extra);
         total = (TextView) view.findViewById(R.id.totalProjects);
         complete = (TextView) view.findViewById(R.id.completedProjects);
+        loading= (TextView) view.findViewById(R.id.loading);
         status= (ImageView) view.findViewById(R.id.status);
         req = new HTTPRequestProcessor();
         api = new APIConfiguration();
@@ -57,7 +56,7 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            total.setText("Please wait...");
+            loading.setText("Please wait...");
         }
 
         @Override
@@ -77,6 +76,7 @@ public class HomeFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(s);
                 success = jsonObject.getBoolean("success");
                 if (success) {
+                    loading.setText(" ");
                     JSONArray responseData = jsonObject.getJSONArray("responseData");
                     if (responseData.length() != 0) {
                         for (int i = 0; i < responseData.length(); i++) {
@@ -99,6 +99,7 @@ public class HomeFragment extends Fragment {
                     active.setText("NOT ACTIVE");
                     extra.setText("View your Projects and select a Project to Work");
                 }
+                extra.setBackgroundColor(Color.parseColor("#fafafa"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

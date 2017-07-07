@@ -47,6 +47,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
+                    Thread.sleep(3000);
                     if (SavedSharedPreference.getUserName(SplashActivity.this).length() == 0) {
                         intent = new Intent(SplashActivity.this, LoginActivity.class);
                     } else {

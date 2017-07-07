@@ -28,6 +28,7 @@ import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
 import com.example.hp.pocket_docket.beans.Project;
 import com.example.hp.pocket_docket.formattingAndValidation.Validator;
 import com.example.hp.pocket_docket.fragments.AddProjectFragment;
+import com.example.hp.pocket_docket.fragments.AllProjectFragment;
 import com.example.hp.pocket_docket.fragments.EditProjectFragment;
 import com.example.hp.pocket_docket.fragments.ProjectDetailFragment;
 import com.example.hp.pocket_docket.httpRequestProcessor.HTTPRequestProcessor;
@@ -192,6 +193,12 @@ public class AdminDashboardActivity extends AppCompatActivity
             ft.replace(R.id.content_admin_dashboard, f);
             ft.commit();
             ft.addToBackStack(null);
+        } else if (id == R.id.complete) {
+            Fragment f = new AllProjectFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_admin_dashboard, f);
+            ft.commit();
+            ft.addToBackStack(null);
         } else if (id == R.id.logout) {
             Intent intent4 = new Intent(AdminDashboardActivity.this, LoginActivity.class);
             intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -231,7 +238,7 @@ public class AdminDashboardActivity extends AppCompatActivity
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 boolean success = jsonObject.getBoolean("success");
-                al = new ArrayList<Project>();
+                al = new ArrayList<>();
                 if (success) {
                     JSONArray jsonArray = jsonObject.getJSONArray("responseData");
                     for (int i = 0; i < jsonArray.length(); i++) {

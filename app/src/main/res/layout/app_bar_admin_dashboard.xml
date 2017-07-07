@@ -29,8 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorGreen"
-        app:fabSize="normal"
+        app:fabSize="auto"
         app:srcCompat="@mipmap/add" />
 
 </android.support.design.widget.CoordinatorLayout>
