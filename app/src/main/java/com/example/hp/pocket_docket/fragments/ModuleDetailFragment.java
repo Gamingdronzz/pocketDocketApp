@@ -172,7 +172,7 @@ public class ModuleDetailFragment extends Fragment {
                     JSONArray memberlist = mem.getJSONArray("MemberList");
                     if (memberlist.length() == 0) {
                         loading.setText("");
-                        tv3.setText("No Members in Module!");
+                        tv3.setText("No members assigned to Module");
                     } else {
                         sprintMemberList = new ArrayList<Member>();
                         for (int j = 0; j < memberlist.length(); j++) {

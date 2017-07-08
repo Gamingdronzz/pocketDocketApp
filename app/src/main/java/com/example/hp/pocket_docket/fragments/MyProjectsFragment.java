@@ -86,69 +86,74 @@ public class MyProjectsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 module = (Module) parent.getItemAtPosition(position);
-                c = Calendar.getInstance();
-                year = c.get(Calendar.YEAR);
-                month = c.get(Calendar.MONTH);
-                day = c.get(Calendar.DAY_OF_MONTH);
-                hour = c.get(Calendar.HOUR_OF_DAY);
-                minute = c.get(Calendar.MINUTE);
-                second = c.get(Calendar.SECOND);
+                if(!Validator.checkStarted(module.getMstart()))
+                {
+                    Toast.makeText(getContext(),"Module not started",Toast.LENGTH_LONG).show();
+                }else {
+                    c = Calendar.getInstance();
+                    year = c.get(Calendar.YEAR);
+                    month = c.get(Calendar.MONTH);
+                    day = c.get(Calendar.DAY_OF_MONTH);
+                    hour = c.get(Calendar.HOUR_OF_DAY);
+                    minute = c.get(Calendar.MINUTE);
+                    second = c.get(Calendar.SECOND);
 
-                //If already working on another module
-                if (workFlag) {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-                    alertDialogBuilder
-                            .setMessage("Already Active on Module " + SavedSharedPreference.getCurModule(getContext()) + " of Project " + SavedSharedPreference.getCurPoject(getContext()))
-                            .setCancelable(true)
-                            .setPositiveButton("OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
-                } else {
-                    LayoutInflater li = LayoutInflater.from(getContext());
-                    View promptsView = li.inflate(R.layout.in_time, null);
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-                    alertDialogBuilder.setView(promptsView);
+                    //If already working on another module
+                    if (workFlag) {
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                        alertDialogBuilder
+                                .setMessage("Already Active on Module " + SavedSharedPreference.getCurModule(getContext()) + " of Project " + SavedSharedPreference.getCurPoject(getContext()))
+                                .setCancelable(true)
+                                .setPositiveButton("OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                    } else {
+                        LayoutInflater li = LayoutInflater.from(getContext());
+                        View promptsView = li.inflate(R.layout.in_time, null);
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                        alertDialogBuilder.setView(promptsView);
 
-                    final TextView work = (TextView) promptsView.findViewById(R.id.work);
-                    final TextView timeIn = (TextView) promptsView.findViewById(R.id.timeIn);
-                    timeIn.setText(hour + ":" + minute + ":" + second);
-                    work.setText("Start Working on \nProject: " + module.getTitle() + "\tModule: " + module.getMtitle() + "?");
+                        final TextView work = (TextView) promptsView.findViewById(R.id.work);
+                        final TextView timeIn = (TextView) promptsView.findViewById(R.id.timeIn);
+                        timeIn.setText(hour + ":" + minute + ":" + second);
+                        work.setText("Start Working on \nProject: " + module.getTitle() + "\tModule: " + module.getMtitle() + "?");
 
-                    alertDialogBuilder
-                            .setCancelable(true)
-                            .setPositiveButton("Start",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            workFlag = true;
-                                            currentModule = module.getMtitle();
-                                            currentModuleId = module.getMno();
-                                            currentProject = module.getTitle();
-                                            inTime = day + "/" + month + "/" + year + " " + hour + ":" + minute + ":" + second;
-                                            txtStatus.setText("ACTIVE\nProject: " + currentProject + "\nModule: " + currentModule);
-                                            SavedSharedPreference.setFlag(getContext(), workFlag);
-                                            SavedSharedPreference.setCurModule(getContext(), currentModule);
-                                            SavedSharedPreference.setCurProject(getContext(), currentProject);
-                                            SavedSharedPreference.setCurModuleId(getContext(), currentModuleId);
-                                            SavedSharedPreference.setAscId(getContext(), module.getAssociationId());
-                                            SavedSharedPreference.setInTime(getContext(), inTime);
-                                            fab.setVisibility(View.VISIBLE);
-                                            dialog.dismiss();
-                                        }
-                                    })
-                            .setNegativeButton("Cancel",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
+                        alertDialogBuilder
+                                .setCancelable(true)
+                                .setPositiveButton("Start",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                workFlag = true;
+                                                currentModule = module.getMtitle();
+                                                currentModuleId = module.getMno();
+                                                currentProject = module.getTitle();
+                                                inTime = day + "/" + month + "/" + year + " " + hour + ":" + minute + ":" + second;
+                                                txtStatus.setText("ACTIVE\nProject: " + currentProject + "\nModule: " + currentModule);
+                                                SavedSharedPreference.setFlag(getContext(), workFlag);
+                                                SavedSharedPreference.setCurModule(getContext(), currentModule);
+                                                SavedSharedPreference.setCurProject(getContext(), currentProject);
+                                                SavedSharedPreference.setCurModuleId(getContext(), currentModuleId);
+                                                SavedSharedPreference.setAscId(getContext(), module.getAssociationId());
+                                                SavedSharedPreference.setInTime(getContext(), inTime);
+                                                fab.setVisibility(View.VISIBLE);
+                                                dialog.dismiss();
+                                            }
+                                        })
+                                .setNegativeButton("Cancel",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
 
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                    }
                 }
             }
         });

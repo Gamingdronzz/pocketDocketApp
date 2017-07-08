@@ -214,7 +214,7 @@ public class ProjectDetailFragment extends Fragment {
                 boolean success = jsonObject.getBoolean("success");
                 if (success) {
                     if (responseData.length() == 0)
-                        name.setText("No Modules in Project " + pname + "!");
+                        name.setText("No Modules added to "+ pname);
                     else {
                         for (int i = 0; i < responseData.length(); i++) {
                             JSONObject object = responseData.getJSONObject(i);

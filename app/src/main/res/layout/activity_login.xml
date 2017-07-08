@@ -1,100 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#111111"
+    android:background="@color/colorBlack"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.hp.pocket_docket.activity.LoginActivity">
 
-    <ImageView
-        android:id="@+id/appicon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:src="@mipmap/launcher" />
-
-    <LinearLayout
-        android:id="@+id/loginLayout1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appicon"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
+        <ImageView
+            android:id="@+id/appicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username: "
-            android:textColor="#EEEEEE"
-            android:textSize="20sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:src="@mipmap/launcher" />
 
-        <EditText
-            android:id="@+id/edtLoginName"
+        <LinearLayout
+            android:id="@+id/loginLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#EEEEEE"
-            android:textSize="20sp"
-            android:maxLines="1" />
-    </LinearLayout>
+            android:layout_below="@+id/appicon"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/loginLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginLayout1"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username: "
+                android:textColor="#EEEEEE"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password: "
-            android:textColor="#EEEEEE"
-            android:textSize="20sp" />
+            <EditText
+                android:id="@+id/edtLoginName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="#EEEEEE"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtLoginPass"
+        <LinearLayout
+            android:id="@+id/loginLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="#EEEEEE"
-            android:textSize="20sp"
-            android:maxLines="1" />
-    </LinearLayout>
+            android:layout_below="@+id/loginLayout1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password: "
+                android:textColor="#EEEEEE"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edtLoginPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColor="#EEEEEE"
+                android:textSize="20sp" />
+        </LinearLayout>
 
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginLayout2"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/back"
-        android:text="Login"
-        android:textSize="20sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btnLogin"
-        android:layout_marginTop="50dp">
-
-        <TextView
-            android:id="@+id/forgot"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:text="@string/forgot"
-            android:textColor="@color/colorRed"
-            android:textSize="15sp"
-             />
-    </LinearLayout>
+            android:layout_below="@+id/loginLayout2"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/back"
+            android:text="Login"
+            android:textSize="20sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/btnLogin"
+            android:layout_marginTop="50dp">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/forgot"
+                android:textColor="@color/colorRed"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
