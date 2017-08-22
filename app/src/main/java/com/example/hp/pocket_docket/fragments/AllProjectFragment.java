@@ -78,12 +78,8 @@ public class AllProjectFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
                 res = req.gETRequestProcessor(url1);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
-            return res;
+                return res;
         }
 
         @Override
@@ -114,6 +110,7 @@ public class AllProjectFragment extends Fragment {
                 tv.setText("");
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(),"Some Error Occured",Toast.LENGTH_LONG).show();
             }
         }
 

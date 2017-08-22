@@ -195,11 +195,7 @@ public class ProjectDetailFragment extends Fragment {
         protected String doInBackground(String... params) {
             id = params[0];
             url = baseURL + "SprintAPI/GetProjectSprintListing/" + id;
-            try {
-                res = httpRequestProcessor.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.gETRequestProcessor(url);
             return res;
         }
 
@@ -214,7 +210,7 @@ public class ProjectDetailFragment extends Fragment {
                 boolean success = jsonObject.getBoolean("success");
                 if (success) {
                     if (responseData.length() == 0)
-                        name.setText("No Modules added to "+ pname);
+                        name.setText("No Modules added to " + pname);
                     else {
                         for (int i = 0; i < responseData.length(); i++) {
                             JSONObject object = responseData.getJSONObject(i);
@@ -242,6 +238,7 @@ public class ProjectDetailFragment extends Fragment {
                     Toast.makeText(getContext(), "Error loading records!", Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -250,11 +247,7 @@ public class ProjectDetailFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "SprintAPI/UpdateSprintStatus/" + params[0] + "/" + params[1];
-            try {
-                res = httpRequestProcessor.pOSTRequestProcessor("", url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.pOSTRequestProcessor("", url);
             return res;
         }
 
@@ -271,6 +264,7 @@ public class ProjectDetailFragment extends Fragment {
                     Toast.makeText(getContext(), "Error Updating Status", Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
 
         }

@@ -11,8 +11,8 @@
         android:layout_marginTop="30dp"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
@@ -22,46 +22,123 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@color/colorAccent" />
 
-
-    <TextView
-        android:id="@+id/myUserName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/myId"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="UserName"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/myDesig"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="Employee ID"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/myPhone"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="Designation"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myDesig"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/myEmail"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="Registered Contact"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="Registered E-Mail"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
 </LinearLayout>

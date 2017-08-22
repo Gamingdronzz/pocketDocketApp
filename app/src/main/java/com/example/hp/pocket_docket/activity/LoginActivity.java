@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
     protected void onPause() {
         super.onPause();
         finish();
@@ -116,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     public class LoginTask extends AsyncTask<String, String, String> {
 
         ProgressDialog pd;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -137,8 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                 jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, urlLogin);
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(LoginActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -152,15 +153,15 @@ public class LoginActivity extends AppCompatActivity {
                 pd.dismiss();
                 JSONObject jsonObject = new JSONObject(s);
                 success = jsonObject.getBoolean("success");
-                String msg=jsonObject.getString("ErrorMessage");
+                String msg = jsonObject.getString("ErrorMessage");
                 if (success) {
-                    String myName= jsonObject.getString("FName") + " " + jsonObject.get("LName");
+                    String myName = jsonObject.getString("FName") + " " + jsonObject.get("LName");
                     String typeId = jsonObject.getString("UserTypeId");
                     String code = jsonObject.getString("UserIdentityKey");
-                    SavedSharedPreference.setName(LoginActivity.this,myName);
-                    SavedSharedPreference.setUserName(LoginActivity.this,name);
-                    SavedSharedPreference.setType(LoginActivity.this,typeId);
-                    SavedSharedPreference.setCode(LoginActivity.this,code);
+                    SavedSharedPreference.setName(LoginActivity.this, myName);
+                    SavedSharedPreference.setUserName(LoginActivity.this, name);
+                    SavedSharedPreference.setType(LoginActivity.this, typeId);
+                    SavedSharedPreference.setCode(LoginActivity.this, code);
                     if (typeId.equals("1")) {
                         Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                         startActivity(intent);
@@ -191,8 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                 jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, urlForgot);
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(LoginActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -213,9 +213,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(LoginActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
-
-
         }
     }
 }

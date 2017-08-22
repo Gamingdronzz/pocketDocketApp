@@ -31,6 +31,7 @@ import java.util.ArrayList;
  */
 
 public class ModuleDetailFragment extends Fragment {
+    Module module;
     private ListView lv3;
     private TextView tv3, loading;
     private String url, baseURL, res;
@@ -43,7 +44,6 @@ public class ModuleDetailFragment extends Fragment {
     private ArrayList<Member> infoAddedList;
     private Bundle bundle;
     private FloatingActionButton fab;
-    Module module;
 
     @Nullable
     @Override
@@ -95,6 +95,17 @@ public class ModuleDetailFragment extends Fragment {
         getActivity().findViewById(R.id.ProjectList).setVisibility(View.VISIBLE);
     }
 
+    private void updateList(ArrayList<Member> ml) {
+        allMemberList = ml;
+        new MemberInfoTask().execute(module.getMno());
+    }
+
+    private void update(ArrayList<Member> ml) {
+        infoAddedList = ml;
+        adapter = new ModuleMemberAdapter(getContext(), infoAddedList);
+        lv3.setAdapter(adapter);
+    }
+
     private class GetMemberListTask extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -104,11 +115,7 @@ public class ModuleDetailFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "MemberAPI/GetApplicationMemberList";
-            try {
-                res = httpRequestProcessor.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.gETRequestProcessor(url);
             return res;
         }
 
@@ -138,24 +145,16 @@ public class ModuleDetailFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    private void updateList(ArrayList<Member> ml) {
-        allMemberList = ml;
-        new MemberInfoTask().execute(module.getMno());
     }
 
     private class MemberInfoTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "SprintAPI/GetSprintListing/" + params[0];
-            try {
-                res = httpRequestProcessor.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.gETRequestProcessor(url);
             return res;
         }
 
@@ -200,6 +199,7 @@ public class ModuleDetailFragment extends Fragment {
                     Toast.makeText(getContext(), "Error loading records!", Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -239,8 +239,7 @@ public class ModuleDetailFragment extends Fragment {
                         Toast.makeText(getContext(), "Some Error Occured!", Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
                 }
             }
             return null;
@@ -251,11 +250,5 @@ public class ModuleDetailFragment extends Fragment {
             loading.setText("");
             update(infoAddedList);
         }
-    }
-
-    private void update(ArrayList<Member> ml) {
-        infoAddedList = ml;
-        adapter = new ModuleMemberAdapter(getContext(), infoAddedList);
-        lv3.setAdapter(adapter);
     }
 }

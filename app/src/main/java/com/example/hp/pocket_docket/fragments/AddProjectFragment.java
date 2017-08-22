@@ -29,6 +29,7 @@ import org.json.JSONObject;
  */
 
 public class AddProjectFragment extends Fragment {
+    boolean success;
     private HTTPRequestProcessor httpRequestProcessor;
     private APIConfiguration apiConfiguration;
     private String jsonPostString, jsonResponseString, baseURL, url;
@@ -36,7 +37,6 @@ public class AddProjectFragment extends Fragment {
     private TextView start, end;
     private Button btn;
     private String pTitle, pDesc, pStart, pEnd, pType;
-    boolean success;
     private FloatingActionButton fab;
 
     @Nullable
@@ -145,8 +145,7 @@ public class AddProjectFragment extends Fragment {
                 jsonResponseString = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, url);
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Some Error Occured",Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -165,6 +164,7 @@ public class AddProjectFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(),"Some Error Occured",Toast.LENGTH_LONG).show();
             }
 
         }

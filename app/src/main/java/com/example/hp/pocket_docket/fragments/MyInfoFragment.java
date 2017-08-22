@@ -24,10 +24,10 @@ import org.json.JSONObject;
  */
 
 public class MyInfoFragment extends Fragment {
+    TextView name, id, desig, contact, email, username;
     private HTTPRequestProcessor req;
     private APIConfiguration api;
     private String baseURL, url, res;
-    TextView name, id, desig, contact, email, username;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
@@ -51,11 +51,7 @@ public class MyInfoFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "MemberAPI/GetMemberDetail/" + SavedSharedPreference.getCode(getContext());
-            try {
-                res = req.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(),"Check your Internet Connection",Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url);
             return res;
         }
 
@@ -69,15 +65,16 @@ public class MyInfoFragment extends Fragment {
                     JSONArray jsonArray = jsonObject.getJSONArray("responseData");
                     JSONObject object = (JSONObject) jsonArray.get(0);
                     name.setText(object.getString("FName") + " " + object.getString("LName"));
-                    username.setText("UserName: " + SavedSharedPreference.getUserName(getContext()));
-                    id.setText("Employee Id: " + object.getString("MemberCode"));
-                    desig.setText("Designation: " + object.getString("Designation"));
-                    contact.setText("Registered Contact: " + object.getString("MobileNo"));
-                    email.setText("Registerd E-Mail: " + object.getString("EmailId"));
+                    username.setText(SavedSharedPreference.getUserName(getContext()));
+                    id.setText(object.getString("MemberCode"));
+                    desig.setText(object.getString("Designation"));
+                    contact.setText(object.getString("MobileNo"));
+                    email.setText(object.getString("EmailId"));
                 } else
                     Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }

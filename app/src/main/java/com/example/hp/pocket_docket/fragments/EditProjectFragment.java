@@ -144,8 +144,7 @@ public class EditProjectFragment extends Fragment {
                 jsonResponseString = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, url);
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -163,6 +162,7 @@ public class EditProjectFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }

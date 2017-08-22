@@ -32,11 +32,11 @@ import java.util.ArrayList;
 
 public class ModuleMemberAdapter extends BaseAdapter {
 
+    Context context;
+    Member m;
     private String baseURL, url, res;
     private HTTPRequestProcessor httpRequestProcessor = new HTTPRequestProcessor();
     private APIConfiguration apiConfiguration = new APIConfiguration();
-    Context context;
-    Member m;
     private ArrayList<Member> memberlist;
     private LayoutInflater inflater;
 
@@ -167,11 +167,7 @@ public class ModuleMemberAdapter extends BaseAdapter {
         protected String doInBackground(String... params) {
             baseURL = apiConfiguration.getApi();
             url = baseURL + "SprintMemberAssociationAPI/DeleteSprintAssociation/" + params[0];
-            try {
-                res = httpRequestProcessor.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(context,"Check your Internet Connection",Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.gETRequestProcessor(url);
             return res;
         }
 
@@ -189,6 +185,7 @@ public class ModuleMemberAdapter extends BaseAdapter {
                     Toast.makeText(context, "Unable to Delete", Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(context, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }

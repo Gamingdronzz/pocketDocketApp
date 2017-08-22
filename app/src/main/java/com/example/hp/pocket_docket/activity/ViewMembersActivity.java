@@ -21,16 +21,15 @@ import java.util.ArrayList;
 
 public class ViewMembersActivity extends AppCompatActivity {
 
+    boolean success;
     private ListView lv;
     private HTTPRequestProcessor req;
     private APIConfiguration api;
     private String baseURL, url, message, res;
-    boolean success;
-    String fname, lname;
-    Member member;
-    ArrayList<Member> al = new ArrayList<Member>();
-
-    MemberAdapter adapter;
+    private String fname, lname;
+    private Member member;
+    private ArrayList<Member> al = new ArrayList<Member>();
+    private MemberAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +50,7 @@ public class ViewMembersActivity extends AppCompatActivity {
     public class ViewTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            try {
-                res = req.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(ViewMembersActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url);
             return res;
         }
 
@@ -96,6 +91,7 @@ public class ViewMembersActivity extends AppCompatActivity {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(ViewMembersActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -42,19 +42,18 @@ public class MyProjectsFragment extends Fragment {
     private ListView lv;
     private HTTPRequestProcessor req;
     private APIConfiguration api;
-    private String baseURL, url, url1, url2, jsonStringToPost, jsonResponseString, res;
-    private String message, code, currentModule, currentModuleId, currentProject, inTime, total, status;
-    private long totalMins, diff, diffHr, diffMin, diffsec;
+    private String baseURL, url, url1, res;
+    private String code, currentModule, currentModuleId, currentProject, inTime;
     private boolean success, workFlag;
     private Module module;
     private Project project;
     private ArrayList<Project> pl = new ArrayList<>();
     private ArrayList<Module> al;
     private MyModuleAdapter adapter;
-    private int hour, minute, second, hr, min, sec, year, month, day, yr, mon, d, h, min1;
+    private int hour, minute, second, year, month, day, h, min1;
     private Calendar c;
     private FloatingActionButton fab;
-    private AlertDialog statusDialog;
+
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_projects, container, false);
@@ -86,10 +85,9 @@ public class MyProjectsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 module = (Module) parent.getItemAtPosition(position);
-                if(!Validator.checkStarted(module.getMstart()))
-                {
-                    Toast.makeText(getContext(),"Module not started",Toast.LENGTH_LONG).show();
-                }else {
+                if (!Validator.checkStarted(module.getMstart())) {
+                    Toast.makeText(getContext(), "Module not started", Toast.LENGTH_LONG).show();
+                } else {
                     c = Calendar.getInstance();
                     year = c.get(Calendar.YEAR);
                     month = c.get(Calendar.MONTH);
@@ -159,72 +157,7 @@ public class MyProjectsFragment extends Fragment {
         });
 
 
-        //----------------------------------click on button to stop working---------------------------------------------
-      /*  fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                {
-                    c = Calendar.getInstance();
-                    yr = c.get(Calendar.YEAR);
-                    mon = c.get(Calendar.MONTH);
-                    d = c.get(Calendar.DAY_OF_MONTH);
-                    hr = c.get(Calendar.HOUR_OF_DAY);
-                    min = c.get(Calendar.MINUTE);
-                    sec = c.get(Calendar.SECOND);
-
-                    LayoutInflater li = LayoutInflater.from(getContext());
-                    View promptsView1 = li.inflate(R.layout.out_time, null);
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-                    alertDialogBuilder.setView(promptsView1);
-
-                    final TextView totalTime = (TextView) promptsView1.findViewById(R.id.totalTime);
-                    final TextView timeOut = (TextView) promptsView1.findViewById(R.id.timeOut);
-                    final TextView in = (TextView) promptsView1.findViewById(R.id.in);
-                    final TextView out = (TextView) promptsView1.findViewById(R.id.out);
-
-                    timeOut.setText(hr + ":" + min + ":" + sec);
-                    in.setText("In: " + SavedSharedPreference.getInTime(getContext()));
-                    out.setText("Out: " + d + "/" + mon + "/" + yr + " " + hr + ":" + min + ":" + sec);
-                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    try {
-                        diff = ((format.parse(d + "/" + mon + "/" + yr + " " + hr + ":" + min + ":" + sec).getTime() - format.parse(SavedSharedPreference.getInTime(getContext())).getTime()));
-                        diffHr = (diff / (1000 * 60 * 60));
-                        diffMin = (diff / (1000 * 60)) % 60;
-                        diffsec = (diff / (1000)) % 60;
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    totalTime.setText(String.valueOf(diffHr) + ":" + String.valueOf(diffMin) + ":" + String.valueOf(diffsec));
-                    alertDialogBuilder
-                            .setCancelable(true)
-                            .setPositiveButton("Update",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            if (Network.isNetworkAvailable(getContext())) {
-                                                totalMins = diffHr * 60 + diffMin;
-                                                total = String.valueOf(totalMins);
-                                                workFlag = false;
-                                                SavedSharedPreference.setFlag(getContext(), workFlag);
-                                                txtStatus.setText("INACTIVE\nSelect Module to Clock In");
-                                                fab.setVisibility(View.INVISIBLE);
-                                                new UpdateTimeTask().execute(total, SavedSharedPreference.getCurModuleId(getContext()), code);
-                                            } else
-                                                Toast.makeText(getContext(), "Could Not Update Time.Check your Network Coonection", Toast.LENGTH_LONG).show();
-                                            dialog.dismiss();
-                                        }
-                                    })
-                            .setNegativeButton("Cancel",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
-                }
-            }
-        });
-      */  return view;
+        return view;
     }
 
     @Override
@@ -237,11 +170,7 @@ public class MyProjectsFragment extends Fragment {
     private class GetProjects extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            try {
-                res = req.gETRequestProcessor(url1);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url1);
             return res;
         }
 
@@ -268,6 +197,7 @@ public class MyProjectsFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
 
         }
@@ -278,11 +208,7 @@ public class MyProjectsFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                res = req.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url);
             return res;
         }
 
@@ -346,103 +272,8 @@ public class MyProjectsFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }
-
-    //-------------------------------------------Update Time------------------------------------------------------------------------
-    /*private class UpdateTimeTask extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("SprintId", params[1]);
-                jsonObject.put("MemberId", params[2]);
-                jsonObject.put("TimeSpend", params[0]);
-                baseURL = api.getApi();
-                url2 = baseURL + "SprintMemberTimeAssociationAPI/AddNewAssociation";
-                jsonStringToPost = jsonObject.toString();
-                jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, url2);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
-            return jsonResponseString;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.d("Response String", s);
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                success = jsonObject.getBoolean("success");
-                message = jsonObject.getString("message");
-                if (success) {
-                    Toast.makeText(getContext(), "Time updated", Toast.LENGTH_LONG).show();
-                    adapter.notifyDataSetChanged();
-                    final CharSequence[] items = {"0-10 %", "10-50 %", "50-90 % ", "90-100 % "};
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("Select The Module Progress");
-                    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int item) {
-                            switch (item) {
-                                case 0:
-                                    status = "1";
-                                    break;
-                                case 1:
-                                    status = "2";
-                                    break;
-                                case 2:
-                                    status = "3";
-                                    break;
-                                case 3:
-                                    status = "4";
-                                    break;
-                            }
-                            new UpdateProgressTask().execute(status);
-                            statusDialog.dismiss();
-                        }
-                    });
-                    statusDialog = builder.create();
-                    statusDialog.show();
-                } else {
-                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-                }
-                new MyProjectListTask().execute();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private class UpdateProgressTask extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            url = baseURL + "SprintMemberAssociationAPI/UpdateSprintStatus/" + SavedSharedPreference.getAscId(getContext()) + "/" + params[0];
-            try {
-                res = req.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
-            return res;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                boolean success = jsonObject.getBoolean("success");
-                if (success) {
-                    Toast.makeText(getContext(), "Progress Updated", Toast.LENGTH_LONG).show();
-                } else
-                    Toast.makeText(getContext(), "Error Updating Progress", Toast.LENGTH_LONG).show();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }*/
 }

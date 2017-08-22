@@ -18,10 +18,10 @@ import android.widget.Toast;
 import com.example.hp.pocket_docket.R;
 import com.example.hp.pocket_docket.apiConfiguration.APIConfiguration;
 import com.example.hp.pocket_docket.formattingAndValidation.Format;
+import com.example.hp.pocket_docket.formattingAndValidation.Validator;
 import com.example.hp.pocket_docket.fragments.DatePickerFragment;
 import com.example.hp.pocket_docket.httpRequestProcessor.HTTPRequestProcessor;
 import com.example.hp.pocket_docket.networkConnection.Network;
-import com.example.hp.pocket_docket.formattingAndValidation.Validator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,7 +118,7 @@ public class RegisterMembersActivity extends AppCompatActivity {
                         edtReEnter.requestFocus();
                         Toast.makeText(RegisterMembersActivity.this, "Password Mismatch! ReEnter Password.", Toast.LENGTH_LONG).show();
                     } else {
-                        new RegistrationTask().execute(fname, lname, desig, gender, dob, emailID, phone, userName, password,empId);
+                        new RegistrationTask().execute(fname, lname, desig, gender, dob, emailID, phone, userName, password, empId);
                     }
                 } else
                     Toast.makeText(RegisterMembersActivity.this, "Unable to Register! No Internet", Toast.LENGTH_LONG).show();
@@ -139,14 +139,14 @@ public class RegisterMembersActivity extends AppCompatActivity {
             phone = params[6];
             userName = params[7];
             password = params[8];
-            empId=params[9];
+            empId = params[9];
 
             JSONObject jsonObject = new JSONObject();
             try {
 
                 jsonObject.put("FName", fname);
                 jsonObject.put("LName", lname);
-                jsonObject.put("MemberCode",empId);
+                jsonObject.put("MemberCode", empId);
                 jsonObject.put("Designation", desig);
                 jsonObject.put("Gender", gender);
                 jsonObject.put("DateOfBirth", dob);
@@ -161,8 +161,7 @@ public class RegisterMembersActivity extends AppCompatActivity {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(RegisterMembersActivity.this,"Check your Internet Connection",Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterMembersActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -209,6 +208,7 @@ public class RegisterMembersActivity extends AppCompatActivity {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(RegisterMembersActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
 
         }

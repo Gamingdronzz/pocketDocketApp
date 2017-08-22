@@ -223,6 +223,14 @@ public class DeveloperDashboardActivity extends AppCompatActivity
         return true;
     }
 
+    private void refreshFragment() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_developer_dashboard);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(currentFragment);
+        ft.attach(currentFragment);
+        ft.commit();
+    }
+
     private class UpdateTimeTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -237,8 +245,7 @@ public class DeveloperDashboardActivity extends AppCompatActivity
                 jsonResponseString = req.pOSTRequestProcessor(jsonStringToPost, url2);
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(DeveloperDashboardActivity.this, "Check your Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(DeveloperDashboardActivity.this, "Some Error occured", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
         }
@@ -287,27 +294,16 @@ public class DeveloperDashboardActivity extends AppCompatActivity
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(DeveloperDashboardActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    private void refreshFragment() {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_developer_dashboard);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(currentFragment);
-        ft.attach(currentFragment);
-        ft.commit();
     }
 
     private class UpdateProgressTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
             url = baseURL + "SprintMemberAssociationAPI/UpdateSprintStatus/" + SavedSharedPreference.getAscId(DeveloperDashboardActivity.this) + "/" + params[0];
-            try {
-                res = req.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(DeveloperDashboardActivity.this, "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url);
             return res;
         }
 
@@ -323,6 +319,7 @@ public class DeveloperDashboardActivity extends AppCompatActivity
                     Toast.makeText(DeveloperDashboardActivity.this, "Error Updating Progress", Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(DeveloperDashboardActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
 
         }

@@ -44,6 +44,7 @@ import java.util.ArrayList;
 public class AdminDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public FloatingActionButton fab;
     private TextView tv, loading;
     private ListView lv;
     private HTTPRequestProcessor req;
@@ -52,7 +53,6 @@ public class AdminDashboardActivity extends AppCompatActivity
     private Project project;
     private ArrayList<Project> al;
     private ProjectAdapter adapter;
-    public FloatingActionButton fab;
     private FragmentTransaction ft;
 
     @Override
@@ -224,11 +224,7 @@ public class AdminDashboardActivity extends AppCompatActivity
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                res = req.gETRequestProcessor(url1);
-            } catch (Exception e) {
-                Toast.makeText(AdminDashboardActivity.this, "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url1);
             return res;
         }
 
@@ -261,9 +257,8 @@ public class AdminDashboardActivity extends AppCompatActivity
                 loading.setText("");
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(AdminDashboardActivity.this, "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
-
-
     }
 }

@@ -33,6 +33,7 @@ import java.util.ArrayList;
  */
 
 public class AssignMembersFragment extends Fragment {
+    boolean success;
     private HTTPRequestProcessor httpRequestProcessor;
     private APIConfiguration apiConfiguration;
     private String baseURL, url, url1, url2;
@@ -42,7 +43,6 @@ public class AssignMembersFragment extends Fragment {
     private TextView pro, mod, current;
     private String sid, sstart, send, sdesc;
     private String[] mlist;
-    boolean success;
     private Module m;
     private Member member;
     private ArrayList<Member> memberListing, currentMemberList;
@@ -127,11 +127,7 @@ public class AssignMembersFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             url2 = baseURL + "SprintAPI/GetSprintListing/" + params[0];
-            try {
-                res = httpRequestProcessor.gETRequestProcessor(url2);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.gETRequestProcessor(url2);
             return res;
         }
 
@@ -167,6 +163,7 @@ public class AssignMembersFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
             new LoadMemberTask().execute();                //Load Members in ListView
         }
@@ -176,11 +173,7 @@ public class AssignMembersFragment extends Fragment {
     private class LoadMemberTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            try {
-                res = httpRequestProcessor.gETRequestProcessor(url1);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
-            }
+            res = httpRequestProcessor.gETRequestProcessor(url1);
             return res;
         }
 
@@ -225,6 +218,7 @@ public class AssignMembersFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -255,12 +249,9 @@ public class AssignMembersFragment extends Fragment {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
             return jsonResponseString;
-
-
         }
 
         @Override
@@ -277,6 +268,7 @@ public class AssignMembersFragment extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
 
         }

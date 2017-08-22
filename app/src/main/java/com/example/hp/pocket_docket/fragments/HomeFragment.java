@@ -24,8 +24,8 @@ import org.json.JSONObject;
 
 
 public class HomeFragment extends Fragment {
-    private TextView active, total, complete,extra,loading;
     ImageView status;
+    private TextView active, total, complete, extra, loading;
     private HTTPRequestProcessor req;
     private APIConfiguration api;
     private String baseURL, url, res;
@@ -37,11 +37,11 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         active = (TextView) view.findViewById(R.id.activeProject);
-        extra= (TextView) view.findViewById(R.id.extra);
+        extra = (TextView) view.findViewById(R.id.extra);
         total = (TextView) view.findViewById(R.id.totalProjects);
         complete = (TextView) view.findViewById(R.id.completedProjects);
-        loading= (TextView) view.findViewById(R.id.loading);
-        status= (ImageView) view.findViewById(R.id.status);
+        loading = (TextView) view.findViewById(R.id.loading);
+        status = (ImageView) view.findViewById(R.id.status);
         req = new HTTPRequestProcessor();
         api = new APIConfiguration();
         baseURL = api.getApi();
@@ -61,11 +61,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                res = req.gETRequestProcessor(url);
-            } catch (Exception e) {
-                Toast.makeText(getContext(),"Check your Internet Connection",Toast.LENGTH_LONG).show();
-            }
+            res = req.gETRequestProcessor(url);
             return res;
         }
 
@@ -102,6 +98,7 @@ public class HomeFragment extends Fragment {
                 extra.setBackgroundColor(Color.parseColor("#fafafa"));
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_LONG).show();
             }
         }
     }
