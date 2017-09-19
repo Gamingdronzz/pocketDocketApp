@@ -118,7 +118,6 @@ public class AdminDashboardActivity extends AppCompatActivity
                 ft.addToBackStack(null);
             }
         });
-
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             public void onBackStackChanged() {
                 new ShowProjectListTask().execute();
@@ -126,7 +125,6 @@ public class AdminDashboardActivity extends AppCompatActivity
         });
 
     }
-
 
     //----------on back button press------------------
     @Override
